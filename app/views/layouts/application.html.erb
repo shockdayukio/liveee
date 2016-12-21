@@ -8,11 +8,41 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
+  <%= stylesheet_link_tag "application", "data-turbolinks-track" => true  %>
+  <!-- JS -->
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true  %>
+  <script type="text/jquery" >
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        lang: "ja",
+        height: 800,
+        timeFormat: 'H:mm',
+        axisFormat: 'H:mm',
+        defaultDate: '2016-01-12',
+        editable: false,
+        eventLimit: false,
+        eventLimitClick:'popover',
+        timeFormat: 'H(:mm)',
+        eventSource: [
+          {
+            events: [
+              <% Live.all.each do |live| %>
+                {
+                  title: <%= live.title %>
+                  start: '2016-'<%= live.day %>
+                }
+              <% end %>
+            ]
+          }
+        ]
+      })
+    });
+  </script>
   <style type="text/css">
   body { padding-top: 80px; }
   @media ( min-width: 768px ) {
@@ -51,26 +81,14 @@
       margin-bottom: 10px;
     }
   }
+    #calendar {
+      max-width: 900px;
+      margin: 0 auto;
+  }
+  .fc-sun, .fc-sat {
+      color: #FF0000;
+  }
   </style>
-  <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-  <script src='lib/jquery.min.js'></script>
-  <script src='lib/moment.min.js'></script>
-  <script src='fullcalendar/fullcalendar.js'></script>
-  <script>
-  $(document).ready(function() {
-
-    // page is now ready, initialize the calendar...
-
-    $('#calendar').fullCalendar({
-      header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-      },
-      lang: "ja",
-    })
-  });
-  </script>
 </head>
 
 <body>
@@ -98,7 +116,6 @@
             </li>
           </ul>
         </div>
-        <!-- <div class="pull-right"> -->
         <ul class="nav navbar-nav">
           <% if user_signed_in? %>
             <li><%= link_to 'SignOut', "/users/sign_out", method: :delete %></li>
@@ -108,7 +125,6 @@
             <li><%= link_to 'SignUp', "/users/sign_up", method: :get %></li>
           <% end %>
         </ul>
-        <!-- </div> -->
       </div>
     </div>
   </div>

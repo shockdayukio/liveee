@@ -27,16 +27,16 @@ class Scraping
 
     eles.each do |ele|
       if ele.search('#dayTitle').present?
-        day = ele.search('#dayTitle').inner_text
+        day = ele.search('#dayTitle').inner_text.gsub("月","-").gsub("日","").gsub(/\(.*?\)/,"")
       else
-        day = Live.last.day
+        day = Live.last.day.gsub(/(\s)/,"")
       end
-      title = ele.search('li .schedule_con, .lastChild')[1].inner_text
-      starting_time = ele.search('li .schedule_con, .lastChild')[0].inner_text
+      title = ele.search('li .schedule_con, .lastChild')[1].inner_text.gsub(/(\s)/,"")
+      starting_time = ele.search('li .schedule_con, .lastChild')[0].inner_text.gsub(/(\s)/,"")
       place = 'ルミネtheよしもと'
-      price = ele.search('li .schedule_con, .lastChild')[4].inner_text
-      performers_list = ele.search('li .schedule_con, .lastChild')[2].inner_text
-      detail = ele.search('li .schedule_con, .lastChild')[3].inner_text
+      price = ele.search('li .schedule_con, .lastChild')[4].inner_text.gsub(/(\s)/,"")
+      performers_list = ele.search('li .schedule_con, .lastChild')[2].inner_text.gsub(/(\s)/,"")
+      detail = ele.search('li .schedule_con, .lastChild')[3].inner_text.gsub(/(\s)/,"")
 
       live = Live.where(title: title, day: day, starting_time: starting_time, place: place, price: price, performer: performers_list, detail: detail).first_or_create
 
