@@ -10,15 +10,14 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag "application", "data-turbolinks-track" => true  %>
   <!-- JS -->
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true  %>
-  <script type="text/jquery" >
+  <script>
     $(document).ready(function() {
       $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
-        },
+        }
         lang: "ja",
         height: 800,
         timeFormat: 'H:mm',
@@ -37,12 +36,14 @@
                   start: '2016-'<%= live.day %>
                 }
               <% end %>
-            ]
-          }
+          ]
+        }
         ]
       })
     });
   </script>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true  %>
+
   <style type="text/css">
   body { padding-top: 80px; }
   @media ( min-width: 768px ) {
