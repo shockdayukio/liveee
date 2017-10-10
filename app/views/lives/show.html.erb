@@ -1,37 +1,6 @@
-<p>
-  <strong>Title:</strong>
-  <%= @live.title %>
-</p>
+  <%= render :partial => "live", locals: { live: @live} %>
+  <%= render :partial => "reviews/new", locals: { live: @live, review: @review} %>
+  <%= render :partial => 'reviews/review', :collection => @reviews, locals: {review: @review} %>
+  <%= link_to 'Edit', edit_life_path(@live) %> |
+  <%= link_to 'Back', lives_path %>
 
-<p>
-  <strong>Day:</strong>
-  <%= @live.day %>
-</p>
-
-<p>
-  <strong>Starting time:</strong>
-  <%= @live.starting_time %>
-</p>
-
-<p>
-  <strong>Place:</strong>
-  <%= @live.place %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @live.price %>
-</p>
-
-<p>
-  <strong>Performer:</strong>
-  <%= @live.performer %>
-</p>
-
-<p>
-  <strong>Detail:</strong>
-  <%= @live.detail %>
-</p>
-
-<%= link_to 'Edit', edit_life_path(@live) %> |
-<%= link_to 'Back', lives_path %>

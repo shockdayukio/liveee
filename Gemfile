@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', git: 'https://github.com/koic/rails', branch: 'quiet_unified_integer_warn_on_rails_5_0_1'
+
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
@@ -31,6 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'json', github: 'flori/json', branch: 'v1.8'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -43,8 +45,14 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'devise'
   gem 'pry-rails'
   gem 'mechanize'
   gem 'kaminari'
+  gem 'paperclip'
+  gem 'bootstrap_form'
+  gem 'rails-i18n'
+  gem 'ransack'
+
 end
 

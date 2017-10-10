@@ -1,14 +1,116 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Liveee</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <style type="text/css">
+  body { padding-top: 80px; }
+  @media ( min-width: 768px ) {
+    #banner {
+      min-height: 300px;
+      border-bottom: none;
+    }
+    .bs-docs-section {
+      margin-top: 8em;
+    }
+    .bs-component {
+      position: relative;
+    }
+    .bs-component .modal {
+      position: relative;
+      top: auto;
+      right: auto;
+      left: auto;
+      bottom: auto;
+      z-index: 1;
+      display: block;
+    }
+    .bs-component .modal-dialog {
+      width: 90%;
+    }
+    .bs-component .popover {
+      position: relative;
+      display: inline-block;
+      width: 220px;
+      margin: 20px;
+    }
+    .nav-tabs {
+      margin-bottom: 15px;
+    }
+    .progress {
+      margin-bottom: 10px;
+    }
+  }
+  </style>
+
+
 </head>
+
 <body>
 
-<%= yield %>
+<header>
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand">Liveee</a>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar-main">
+        <div class="nav-left">
+          <ul class="nav navbar-nav">
+            <li>
+              <div class="navbar-form navbar-left" role="search">
+                <div class="input-group">
+                  <%= search_form_for(Live.search, url: search_lives_path, html: { method: :get, class: 'form-inline', role: 'form' }) do |f| %>
+                    <%= render '/lives/search_form_nav', f: f %>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- <div class="pull-right"> -->
+        <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+            <li><%= link_to 'SignOut', "/users/sign_out", method: :delete %></li>
+            <li><a href="/users/<%= current_user.id %>">MyPage</a></li>
+          <% else %>
+            <li><%= link_to 'LogIn', "/users/sign_in", method: :get %></li>
+            <li><%= link_to 'SignUp', "/users/sign_up", method: :get %></li>
+          <% end %>
+        </ul>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <%= yield %>
+</div>
+
+<footer>
+  <div class="container">
+    <p>(C) 2016 YUKIHIRO UEDA</p>
+  </div>
+</footer>
+
+
+
 
 </body>
 </html>
+
+
