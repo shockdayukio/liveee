@@ -14,6 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require moment
-//= require fullcalendar
+//= require moment.min
+//= require fullcalendar.min
 //= require_tree .
